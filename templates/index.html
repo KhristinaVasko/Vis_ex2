@@ -6,13 +6,23 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="../static/js/js.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <title>Document</title>
 </head>
 <body>
-<h1>Hello</h1>
-  <div id="scatterplot"></div>
-  <div id="heatmap"></div>
+<div class="container">
+    <div class="main-container">
+        <div id="my_dataviz"></div>
+        <svg id="pca_scatterplot"></svg>
+    </div>
+</div>
+
+ <!-- Embed player_df dataset as a JavaScript variable -->
+    <script>
+        const playerData = JSON.parse('{{ player_df | tojson | safe }}');
+    </script>
+
+
 <script src="../static/js/js.js"></script>
 </body>
 </html>

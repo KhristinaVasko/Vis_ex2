@@ -15,9 +15,22 @@ body {
     border: 0 solid black;
     font-size: large;
 }
-
 .svg_line_plot {
     float:left; align-content: center; height: auto; width: 85%;
     margin-top:10px; margin-bottom: 10px; margin-left:3%; padding-top: 5px; padding-bottom: 5px; padding-left:3%;
     opacity: 0.0;
+}
+.graph {
+    margin: 0 auto;
+    background-color: white;
+}
+
+.tooltip {
+    background-color: lightsalmon;
+    border: 1px solid black;
+    width: 100px;
+    opacity: 0;
+    top: 50px;
+    color: black;
+    position: absolute;
 }

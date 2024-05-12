@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 import json
 import pandas as pd
 from sklearn.decomposition import PCA
@@ -72,12 +72,8 @@ plt.show()
 
 @app.route('/')
 def data():
-    # replace this with the real data
-    testData = ["df_agg_player", "df_seas_player"]
-
     # return the index file and the data
-    return render_template("index.html", data=json.dumps(testData))
-
+    return render_template('index.html', player_df=player_df.to_dict(orient='records'))
 
 if __name__ == '__main__':
     app.run(debug=True)
