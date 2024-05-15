@@ -38,8 +38,22 @@ relevant_columns = ['player_id', 'season', 'total_games', 'games_started', 'minu
 top_player_ids = player_data['Player ID'].tolist()
 df_filtered = df_seas_player[relevant_columns][df_seas_player['player_id'].isin(top_player_ids)]
 
-print(df_filtered.head())
+def adjust_year(season):
+    start_year, end_year = season.split('-')
+    start_year = int(start_year)
+    end_year = int(end_year)
+    if end_year < 25:  # Jahreszahlen kleiner als 50 gehören zu 2000+
+        end_year += 2000
+    else:  # Jahreszahlen 50 oder größer gehören zu 1900+
+        end_year += 1900
+    return str(end_year)
 
+df_filtered.fillna( 0 , inplace=True)
+# Transformation der 'season'-Spalte
+df_filtered['season'] = df_filtered['season'].apply(adjust_year)
+
+
+print(df_filtered.head())
 
 # Scaling the numeric data
 scaler = StandardScaler()
@@ -72,8 +86,7 @@ plt.show()
 
 @app.route('/')
 def data():
-    # return the index file and the data
-    return render_template('index.html', player_df=player_df.to_dict(orient='records'))
-
+    return render_template('index.html', player_df=player_df.to_dict(orient='records'),
+                           df_filtered=df_filtered.to_dict(orient='records'))
 if __name__ == '__main__':
     app.run(debug=True)
